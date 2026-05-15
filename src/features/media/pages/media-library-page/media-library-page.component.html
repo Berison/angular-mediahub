@@ -1,1 +1,9 @@
-<md-media-grid [items]="mediaFacade.mediaItems()" />
+<div class="media-toolbar mb-6">
+  <md-media-toolbar
+    [searchValue]="mediaFacade.searchQuery()"
+    (searchChanged)="onSearchChanged($event)"
+  />
+</div>
+<div class="media-grid">
+  <md-media-grid [items]="mediaFacade.filteredMediaItems()" />
+</div>
