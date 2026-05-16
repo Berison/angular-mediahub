@@ -1,6 +1,8 @@
 <div class="media-toolbar mb-6">
   <md-media-toolbar
     [searchValue]="mediaFacade.searchQuery()"
+    [totalCount]="mediaFacade.totalMediaItemsCount()"
+    [filteredCount]="mediaFacade.filteredMediaItemsCount()"
     (searchChanged)="onSearchChanged($event)"
   />
 </div>

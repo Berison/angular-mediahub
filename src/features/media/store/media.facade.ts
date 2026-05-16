@@ -19,6 +19,8 @@ export class MediaFacade {
 
   readonly mediaItems = computed(() => this.mediaQuery.data() ?? []);
 
+  readonly totalMediaItemsCount = computed(() => this.mediaItems().length);
+
   readonly filteredMediaItems = computed(() => {
     const searchQuery = this.searchQuery();
 
@@ -28,6 +30,8 @@ export class MediaFacade {
 
     return this.mediaItems().filter((item) => item.filename.toLowerCase().includes(searchQuery));
   });
+
+  readonly filteredMediaItemsCount = computed(() => this.filteredMediaItems().length);
 
   readonly isLoading = computed(() => this.mediaQuery.isLoading());
   readonly isError = computed(() => this.mediaQuery.isError());
