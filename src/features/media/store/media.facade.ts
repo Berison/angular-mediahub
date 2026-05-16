@@ -36,4 +36,8 @@ export class MediaFacade {
   setSearchQuery(value: string): void {
     this.searchQueryState.set(value.trim().toLowerCase());
   }
+
+  refetchMedia(): void {
+    this.mediaQuery.refetch();
+  }
 }

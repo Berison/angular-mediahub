@@ -1,0 +1,21 @@
+<div
+  class="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-red-200 bg-red-50 p-10 text-center"
+>
+  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-xl">
+    ⚠️
+  </div>
+
+  <h2 class="text-lg font-semibold text-red-950">Failed to load media</h2>
+
+  <p class="mt-2 max-w-md text-sm text-red-700">
+    Something went wrong while loading your media library. Please try again.
+  </p>
+
+  <button
+    type="button"
+    class="mt-6 rounded-xl bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+    (click)="retryClicked.emit()"
+  >
+    Try again
+  </button>
+</div>

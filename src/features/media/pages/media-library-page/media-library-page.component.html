@@ -5,5 +5,12 @@
   />
 </div>
 <div class="media-grid">
-  <md-media-grid [items]="mediaFacade.filteredMediaItems()" />
+  @if (mediaFacade.isLoading()) {
+    <md-media-grid-skeleton />
+  }
+  @if (mediaFacade.error()) {
+    <md-media-error-state (retryClicked)="onRetryClicked()" />
+  } @else {
+    <md-media-grid [items]="mediaFacade.filteredMediaItems()" />
+  }
 </div>
