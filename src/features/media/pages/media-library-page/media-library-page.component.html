@@ -1,16 +1,18 @@
 <div class="media-toolbar mb-6">
   <md-media-toolbar
     [searchValue]="mediaFacade.searchQuery()"
+    [filterValue]="mediaFacade.sortingQuery()"
+    [filterItems]="mediaFacade.mediaFilterItems()"
     [totalCount]="mediaFacade.totalMediaItemsCount()"
     [filteredCount]="mediaFacade.filteredMediaItemsCount()"
+    (filterChanged)="onFilterChanged($event)"
     (searchChanged)="onSearchChanged($event)"
   />
 </div>
 <div class="media-grid">
-  @if (mediaFacade.isLoading()) {
+  @if (mediaFacade.isMediaLoading()) {
     <md-media-grid-skeleton />
-  }
-  @if (mediaFacade.error()) {
+  } @else if (mediaFacade.mediaError()) {
     <md-media-error-state (retryClicked)="onRetryClicked()" />
   } @else {
     <md-media-grid [items]="mediaFacade.filteredMediaItems()" />

@@ -1,3 +1,4 @@
+import { MediaSorting } from '../models/media-filters.model';
 import { MediaItem } from '../models/media-item.model';
 
 export const MEDIA_MOCK: MediaItem[] = [
@@ -151,5 +152,28 @@ export const MEDIA_MOCK: MediaItem[] = [
     tags: ['nature', 'wallpaper'],
     createdAt: new Date('2026-05-06'),
     previewUrl: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200',
+  },
+];
+
+export const MEDIA_SORT_ITEMS: MediaSorting[] = [
+  {
+    type: 'newest',
+    query: 'newest',
+  },
+  {
+    type: 'oldest',
+    query: 'oldest',
+  },
+  {
+    type: 'filename A-Z',
+    query: 'a-z',
+  },
+  {
+    type: 'filename Z-A',
+    query: 'z-a',
+  },
+  {
+    type: 'largest size',
+    query: 'largest-size',
   },
 ];

@@ -1,19 +1,13 @@
-<div class="search mb-3">
-  <input
-    name="search"
-    type="search"
-    placeholder="Search..."
-    class="w-full max-w-sm rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-4 focus:ring-zinc-100"
-    (input)="changedSearchValue($event)"
-    [value]="searchValue()"
-  />
-</div>
-<div class="show-count">
-  <p class="text-sm text-zinc-500">
-    Showing
-    <span class="font-medium text-zinc-900">{{ filteredCount() }}</span>
-    of
-    <span class="font-medium text-zinc-900">{{ totalCount() }}</span>
-    media items
-  </p>
+<div class="flex justify-between">
+  <div class="left-side flex-1">
+    <md-media-search (searchChanged)="changedSearchValue($event)" [searchValue]="searchValue()" />
+    <md-media-total-count [filteredCount]="filteredCount()" [totalCount]="totalCount()" />
+  </div>
+  <div class="right-side">
+    <md-media-filter
+      (filterChanged)="changedFilterValue($event)"
+      [filterValue]="filterValue()"
+      [filterItems]="filterItems()"
+    />
+  </div>
 </div>
