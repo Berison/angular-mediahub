@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MediaGridComponent } from '../../components/media-grid/media-grid.component';
 import { MediaFacade } from '../../store/media.facade';
 import { MediaToolbarComponent } from '../../components/media-toolbar/media-toolbar.component';
@@ -6,6 +6,7 @@ import { MediaGridSkeletonComponent } from '../../components/media-grid-skeleton
 import { MediaErrorStateComponent } from '../../components/media-error-state/media-error-state.component';
 import { MediaSortingQuery } from '../../models/media-filters.model';
 import { MediaKeyStatus } from '../../models/media-status.model';
+import { MediaLoadMoreComponent } from '../../components/media-load-more/media-load-more.component';
 
 @Component({
   selector: 'md-media-library-page',
@@ -15,6 +16,7 @@ import { MediaKeyStatus } from '../../models/media-status.model';
     MediaToolbarComponent,
     MediaGridSkeletonComponent,
     MediaErrorStateComponent,
+    MediaLoadMoreComponent,
   ],
 })
 export class MediaLibraryPage {
@@ -34,5 +36,9 @@ export class MediaLibraryPage {
 
   onRetryClicked() {
     this.mediaFacade.refetchMedia();
+  }
+
+  onLoadMoreClicked() {
+    this.mediaFacade.loadMoreItems();
   }
 }

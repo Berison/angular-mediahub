@@ -19,8 +19,11 @@
     <md-media-error-state (retryClicked)="onRetryClicked()" />
   } @else {
     <md-media-grid
-      [items]="mediaFacade.filteredMediaItems()"
+      [items]="mediaFacade.visibleMediaItems()"
       [statusItems]="mediaFacade.mediaStatuses()"
     />
+    @if (mediaFacade.showLoadMore()) {
+      <md-media-load-more (loadMoreClick)="onLoadMoreClicked()" />
+    }
   }
 </div>
