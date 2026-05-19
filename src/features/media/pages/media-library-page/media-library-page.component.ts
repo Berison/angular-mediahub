@@ -5,6 +5,7 @@ import { MediaToolbarComponent } from '../../components/media-toolbar/media-tool
 import { MediaGridSkeletonComponent } from '../../components/media-grid-skeleton/media-grid-skeleton.component';
 import { MediaErrorStateComponent } from '../../components/media-error-state/media-error-state.component';
 import { MediaSortingQuery } from '../../models/media-filters.model';
+import { MediaKeyStatus } from '../../models/media-status.model';
 
 @Component({
   selector: 'md-media-library-page',
@@ -25,6 +26,10 @@ export class MediaLibraryPage {
 
   onFilterChanged(newValue: MediaSortingQuery) {
     this.mediaFacade.setSortingQuery(newValue);
+  }
+
+  onStatusChanged(newValue: MediaKeyStatus) {
+    this.mediaFacade.setStatusQuery(newValue);
   }
 
   onRetryClicked() {

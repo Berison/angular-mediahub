@@ -3,11 +3,17 @@
     <md-media-search (searchChanged)="changedSearchValue($event)" [searchValue]="searchValue()" />
     <md-media-total-count [filteredCount]="filteredCount()" [totalCount]="totalCount()" />
   </div>
-  <div class="right-side">
-    <md-media-filter
-      (filterChanged)="changedFilterValue($event)"
-      [filterValue]="filterValue()"
-      [filterItems]="filterItems()"
+  <div class="right-side flex gap-4">
+    <md-media-select
+      (selectChanged)="changedFilterValue($event)"
+      [selectValue]="filterValue()"
+      [selectItems]="filterItems()"
+    />
+    <md-media-select
+      (selectChanged)="changedStatusValue($event)"
+      [selectValue]="statusValue()"
+      [selectItems]="statusItemsForSelect()"
+      [showAllOptions]="{ show: true, optionText: 'statuses' }"
     />
   </div>
 </div>

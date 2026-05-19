@@ -1,17 +1,21 @@
 import { Component, input, output } from '@angular/core';
-import { MediaSorting, MediaSortingQuery } from '../../../../models/media-filters.model';
 import { TitleCasePipe } from '@angular/common';
+import { MediaSorting } from '../../../features/media/models/media-filters.model';
 
 @Component({
-  selector: 'md-media-filter',
+  selector: 'md-media-select',
   template: `<div class="relative">
     <select
       name="filter-by"
       class="min-w-48 appearance-none rounded-xl border border-zinc-200 bg-white px-4 py-2.5 pr-10 text-sm font-medium text-zinc-700 shadow-sm outline-none transition hover:border-zinc-300 focus:border-zinc-400 focus:ring-4 focus:ring-zinc-100"
-      (change)="changeFilter($event)"
+      [value]="selectValue()"
+      (change)="changeSelect($event)"
     >
-      @for (item of filterItems(); track item.query) {
-        <option [value]="item.query" [selected]="item.query === filterValue()">
+      @if (showAllOptions().show) {
+        <option value="" selected>All {{ showAllOptions().optionText }}</option>
+      }
+      @for (item of selectItems(); track item.query) {
+        <option [value]="item.query" [class]="item.classes">
           {{ item.type | titlecase }}
         </option>
       }
@@ -32,14 +36,18 @@ import { TitleCasePipe } from '@angular/common';
   </div>`,
   imports: [TitleCasePipe],
 })
-export class MediaFilterComponent {
-  readonly filterItems = input<MediaSorting[]>([]);
-  readonly filterValue = input<MediaSortingQuery>();
-  readonly filterChanged = output<MediaSortingQuery>();
+export class MediaSelectComponent {
+  readonly selectItems = input<{ type: string; query: string; classes?: string }[]>([]);
+  readonly selectValue = input<string>();
+  readonly selectChanged = output<string>();
+  readonly showAllOptions = input<{ show: boolean; optionText: string }>({
+    show: false,
+    optionText: '',
+  });
 
-  changeFilter(event: Event) {
+  changeSelect(event: Event) {
     const select = event.target as HTMLSelectElement;
 
-    this.filterChanged.emit(select.value as MediaSortingQuery);
+    this.selectChanged.emit(select.value);
   }
 }

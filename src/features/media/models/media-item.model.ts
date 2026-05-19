@@ -1,4 +1,4 @@
-import { MediaStatus } from './media-status.model';
+import { MediaKeyStatus } from './media-status.model';
 
 export interface MediaItem {
   id: string;
@@ -6,7 +6,7 @@ export interface MediaItem {
   size: number;
   width: number;
   height: number;
-  status: MediaStatus;
+  status: MediaKeyStatus;
   tags: string[];
   createdAt: Date;
   previewUrl: string;

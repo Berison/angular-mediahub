@@ -36,9 +36,9 @@
         <p class="text-zinc-400 mb-3">Status</p>
         <span
           class="rounded-full px-2 py-1 text-xs font-medium"
-          [class]="statusStyles[item().status].classes"
+          [class]="statusItems()[item().status]?.classes"
         >
-          {{ statusStyles[item().status].label }}
+          {{ statusItems()[item().status]?.label }}
         </span>
       </div>
 

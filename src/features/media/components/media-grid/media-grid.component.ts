@@ -2,6 +2,7 @@ import { Component, inject, input } from '@angular/core';
 import { MediaCardComponent } from '../media-card/media-card.component';
 import { MediaItem } from '../../models/media-item.model';
 import { MediaEmptyStateComponent } from '../media-empty-state/media-empty-state.component';
+import { MediaFullStatuses } from '../../models/media-status.model';
 
 @Component({
   selector: 'md-media-grid',
@@ -10,4 +11,5 @@ import { MediaEmptyStateComponent } from '../media-empty-state/media-empty-state
 })
 export class MediaGridComponent {
   readonly items = input.required<MediaItem[]>();
+  readonly statusItems = input.required<MediaFullStatuses>();
 }

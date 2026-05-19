@@ -3,6 +3,7 @@ import { MediaApi } from '../api/media.api';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { MediaSorting, MediaSortingQuery } from '../models/media-filters.model';
 import { MediaItem } from '../models/media-item.model';
+import { MediaKeyStatus } from '../models/media-status.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,27 +21,41 @@ export class MediaFacade {
     queryFn: () => this.mediaApi.getMediaFilterList(),
   }));
 
+  private readonly mediaStatusesQuery = injectQuery(() => ({
+    queryKey: ['mediaStatuses'],
+    queryFn: () => this.mediaApi.getMediaStatuses(),
+  }));
+
   private readonly searchQueryState = signal('');
   private readonly sortingQueryState = signal<MediaSortingQuery>('newest');
+  private readonly statusQueryState = signal<MediaKeyStatus | ''>('');
 
   readonly searchQuery = computed(() => this.searchQueryState());
   readonly sortingQuery = computed(() => this.sortingQueryState());
+  readonly statusQuery = computed(() => this.statusQueryState());
 
   readonly mediaItems = computed(() => this.mediaQuery.data() ?? []);
   readonly mediaFilterItems = computed(() => this.mediaFilterQuery.data() ?? []);
+  readonly mediaStatuses = computed(() => this.mediaStatusesQuery.data() ?? {});
 
   readonly totalMediaItemsCount = computed(() => this.mediaItems().length);
 
   readonly filteredMediaItems = computed(() => {
     const searchQuery = this.searchQuery();
 
-    const sortedItemsByQuery: MediaItem[] = this.sortItemsByQuery(this.sortingQuery());
+    let sortedItemsByQuery: MediaItem[] = this.sortItemsByQuery(this.sortingQuery());
 
-    if (!searchQuery) {
-      return sortedItemsByQuery;
+    if (this.statusQuery()) {
+      sortedItemsByQuery = sortedItemsByQuery.filter((item) => item.status === this.statusQuery());
     }
 
-    return sortedItemsByQuery.filter((item) => item.filename.toLowerCase().includes(searchQuery));
+    if (searchQuery) {
+      sortedItemsByQuery = sortedItemsByQuery.filter((item) =>
+        item.filename.toLowerCase().includes(searchQuery),
+      );
+    }
+
+    return sortedItemsByQuery;
   });
 
   readonly filteredMediaItemsCount = computed(() => this.filteredMediaItems().length);
@@ -90,6 +105,10 @@ export class MediaFacade {
 
   setSortingQuery(newState: MediaSortingQuery): void {
     this.sortingQueryState.set(newState);
+  }
+
+  setStatusQuery(newState: MediaKeyStatus | ''): void {
+    this.statusQueryState.set(newState);
   }
 
   refetchMedia(): void {

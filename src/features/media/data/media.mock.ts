@@ -1,5 +1,6 @@
 import { MediaSorting } from '../models/media-filters.model';
 import { MediaItem } from '../models/media-item.model';
+import { MediaFullStatuses } from '../models/media-status.model';
 
 export const MEDIA_MOCK: MediaItem[] = [
   {
@@ -45,7 +46,7 @@ export const MEDIA_MOCK: MediaItem[] = [
     height: 1080,
     status: 'approved',
     tags: ['marketing', 'summer', 'banner'],
-    createdAt: new Date('2026-05-01'),
+    createdAt: new Date('2026-02-01'),
     previewUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200',
   },
 
@@ -80,7 +81,7 @@ export const MEDIA_MOCK: MediaItem[] = [
     height: 1080,
     status: 'approved',
     tags: ['marketing', 'summer', 'banner'],
-    createdAt: new Date('2026-05-01'),
+    createdAt: new Date('2026-01-01'),
     previewUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200',
   },
 
@@ -177,3 +178,30 @@ export const MEDIA_SORT_ITEMS: MediaSorting[] = [
     query: 'largest-size',
   },
 ];
+
+export const MEDIA_STATUSES_ITEMS: MediaFullStatuses = {
+  new: {
+    label: 'New',
+    classes: 'bg-blue-100 text-blue-700',
+  },
+
+  in_review: {
+    label: 'In Review',
+    classes: 'bg-yellow-100 text-yellow-700',
+  },
+
+  approved: {
+    label: 'Approved',
+    classes: 'bg-green-100 text-green-700',
+  },
+
+  rejected: {
+    label: 'Rejected',
+    classes: 'bg-red-100 text-red-700',
+  },
+
+  archived: {
+    label: 'Archived',
+    classes: 'bg-zinc-200 text-zinc-700',
+  },
+};
