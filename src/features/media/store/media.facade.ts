@@ -114,6 +114,7 @@ export class MediaFacade {
   }
 
   setStatusQuery(newState: MediaKeyStatus | ''): void {
+    console.log(newState);
     this.statusQueryState.set(newState);
     this.resetPagination();
   }

@@ -8,14 +8,17 @@ import { MediaSorting } from '../../../features/media/models/media-filters.model
     <select
       name="filter-by"
       class="min-w-48 appearance-none rounded-xl border border-zinc-200 bg-white px-4 py-2.5 pr-10 text-sm font-medium text-zinc-700 shadow-sm outline-none transition hover:border-zinc-300 focus:border-zinc-400 focus:ring-4 focus:ring-zinc-100"
-      [value]="selectValue()"
       (change)="changeSelect($event)"
     >
       @if (showAllOptions().show) {
-        <option value="" selected>All {{ showAllOptions().optionText }}</option>
+        <option value="">All {{ showAllOptions().optionText }}</option>
       }
       @for (item of selectItems(); track item.query) {
-        <option [value]="item.query" [class]="item.classes">
+        <option
+          [value]="item.query"
+          [class]="item.classes"
+          [selected]="item.query === selectValue()"
+        >
           {{ item.type | titlecase }}
         </option>
       }
