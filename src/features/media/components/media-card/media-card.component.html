@@ -1,61 +1,63 @@
 <div
   class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
 >
-  <div class="h-56 overflow-hidden bg-zinc-100">
-    <img
-      class="h-full w-full object-cover"
-      [src]="item().previewUrl"
-      [alt]="item().filename"
-      loading="lazy"
-    />
-  </div>
-
-  <div class="space-y-4 p-4">
-    <div>
-      <strong class="line-clamp-1 block text-sm font-semibold text-zinc-900">
-        {{ item().filename | fileName | titlecase }}
-      </strong>
-
-      <p class="mt-1 line-clamp-1 text-xs text-zinc-500">
-        {{ item().filename }}
-      </p>
+  <a [routerLink]="item().id">
+    <div class="h-56 overflow-hidden bg-zinc-100">
+      <img
+        class="h-full w-full object-cover"
+        [src]="item().previewUrl"
+        [alt]="item().filename"
+        loading="lazy"
+      />
     </div>
 
-    <div class="grid grid-cols-2 gap-3 text-xs">
+    <div class="space-y-4 p-4">
       <div>
-        <p class="text-zinc-400">Size</p>
-        <p class="font-medium text-zinc-700">{{ item().size | fileSize }}</p>
-      </div>
+        <strong class="line-clamp-1 block text-sm font-semibold text-zinc-900">
+          {{ item().filename | fileName | titlecase }}
+        </strong>
 
-      <div>
-        <p class="text-zinc-400">Dimensions</p>
-        <p class="font-medium text-zinc-700">{{ item().width }} × {{ item().height }}</p>
-      </div>
-
-      <div>
-        <p class="text-zinc-400 mb-3">Status</p>
-        <span
-          class="rounded-full px-2 py-1 text-xs font-medium"
-          [class]="statusItems()[item().status]?.classes"
-        >
-          {{ statusItems()[item().status]?.label }}
-        </span>
-      </div>
-
-      <div>
-        <p class="text-zinc-400">Created</p>
-        <p class="font-medium text-zinc-700">
-          {{ item().createdAt | date: 'dd MMM yyyy' }}
+        <p class="mt-1 line-clamp-1 text-xs text-zinc-500">
+          {{ item().filename }}
         </p>
       </div>
-    </div>
 
-    <div class="flex flex-wrap gap-1.5">
-      @for (tag of item().tags; track tag) {
-        <span class="rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600">
-          {{ tag }}
-        </span>
-      }
-    </div>
-  </div>
+      <div class="grid grid-cols-2 gap-3 text-xs">
+        <div>
+          <p class="text-zinc-400">Size</p>
+          <p class="font-medium text-zinc-700">{{ item().size | fileSize }}</p>
+        </div>
+
+        <div>
+          <p class="text-zinc-400">Dimensions</p>
+          <p class="font-medium text-zinc-700">{{ item().width }} × {{ item().height }}</p>
+        </div>
+
+        <div>
+          <p class="text-zinc-400 mb-3">Status</p>
+          <span
+            class="rounded-full px-2 py-1 text-xs font-medium"
+            [class]="statusItems()[item().status]?.classes"
+          >
+            {{ statusItems()[item().status]?.label }}
+          </span>
+        </div>
+
+        <div>
+          <p class="text-zinc-400">Created</p>
+          <p class="font-medium text-zinc-700">
+            {{ item().createdAt | date: 'dd MMM yyyy' }}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5">
+        @for (tag of item().tags; track tag) {
+          <span class="rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600">
+            {{ tag }}
+          </span>
+        }
+      </div>
+    </div></a
+  >
 </div>

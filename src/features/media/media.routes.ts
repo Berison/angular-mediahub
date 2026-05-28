@@ -12,4 +12,15 @@ export const MEDIA_ROUTES: Routes = [
       description: 'Manage your local media assets',
     },
   },
+  {
+    path: ':id',
+    loadComponent: () =>
+      import('./pages/media-detail-page/media-detail-page.component').then(
+        (m) => m.MediaDetailPage,
+      ),
+    data: {
+      title: 'Media Library',
+      description: 'Manage your local media assets',
+    },
+  },
 ];

@@ -129,4 +129,8 @@ export class MediaFacade {
   private resetPagination() {
     this.visibleItemsCountState.set(this.pageSize);
   }
+
+  getMediaItemById(id: string): MediaItem | undefined {
+    return this.mediaItems().find((item) => item.id === id);
+  }
 }

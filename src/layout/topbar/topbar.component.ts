@@ -1,5 +1,5 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, computed, inject } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
 
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -13,7 +13,6 @@ type RouterData = { title: string; description: string };
 })
 export class TopbarComponent {
   private readonly router = inject(Router);
-  private readonly activeRoute = inject(ActivatedRoute);
 
   private readonly routerData = toSignal(
     this.router.events.pipe(

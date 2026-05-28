@@ -1,0 +1,9 @@
+<div class="back-inner mb-5">
+  <a routerLink="media" class="flex gap-2">
+    <lucide-icon [name]="icons.stepBack" /> Back to media</a
+  >
+</div>
+@if (mediaItem()) {
+  <md-media-detail [mediaItem]="mediaItem()!" [statuses]="statuses()" />
+}
+@if (isMediaLoading()) {}
